@@ -1,0 +1,36 @@
+{% extends 'main/base.html' %}
+
+{% block title %} Sign In {% endblock %}
+
+{% block content %}
+<div class = "form">
+<section class="container content">
+
+    <h1>Sign In </h1>
+
+    <div class="row">
+
+        <div class="col-6">
+           
+
+            <form action="{% url 'accounts:loginUser' %}" method="POST" >
+                {% csrf_token %}
+                <label>UserName:</label>
+                <input class="form-control " type="text" name="username"  />
+
+                <label>Password:</label>
+                <input class="form-control" type="password" name="password" required minlength="8" />
+
+
+                <input class="btn btn-dark mt-3" type="submit" value="Sign In" />
+                <hr>
+                <h6>If You don't have an account please register <a href="{% url 'accounts:registerPage' %}">Sign up</a></h6>
+            </form>
+
+        </div>
+
+    </div>
+
+</section>
+</div>
+{% endblock %}

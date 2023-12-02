@@ -17,9 +17,19 @@
     
           <ul class="nav nav-pills">
             <li class="nav-item"><a href="{% url 'main:homePage' %}" class="nav-link active" aria-current="page">Home</a></li>
+            {% if request.user.is_staff %}
             <li class="nav-item"><a href="{% url 'blog:addBlog' %}" class="nav-link">Add Blog</a></li>
+            {% endif %}
             <li class="nav-item"><a href="{% url 'blog:displayBlog' %}" class="nav-link">Dicover Blogs</a></li>
             <li class="nav-item"><a href="{% url 'blog:searchBlog' %}" class="nav-link">Search Page</a></li>
+            {% if request.user.is_authenticated %}
+                <li class="nav-item">
+                  <a class="nav-link m-0">Hi, {{ request.user.username }}</a>
+                </li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'accounts:logoutUser' %}" >Log out</a></li>
+              {% else %}
+                <li class="nav-item"><a class="nav-link" href="{% url 'accounts:loginUser' %}" >Sign in</a></li>
+              {% endif %}
         </ul>
         <form role="search" action="{% url 'blog:searchBlog'  %}" method="GET">
     

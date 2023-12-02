@@ -7,14 +7,17 @@
 <section class="container  content ">
 
     <h1 class = "text-uppercase fw-bold fs-1 text-center">Details Post</h1>
-
+      
     <div class="dropdown mb-3">
+      {% if request.user.is_staff %}
       <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
         Edit
       </button>
       <ul class="dropdown-menu ">
+        
         <li><a class="dropdown-item" href="{% url 'blog:updateBlog' blog.id %}">Update</a></li>
         <li><a class="dropdown-item" href="{% url 'blog:deleteBlog' blog.id %}">Delete</a></li>
+        {% endif%}
       </ul>
     </div>
         <table class="table mb-3">
@@ -81,7 +84,8 @@
           </div>
           {% endfor %}    
       </table>
-      
+
+       {% if request.user.is_authenticated %}
   
         <div class="col-6">
            
@@ -106,12 +110,14 @@
                   <option value="5" >5</option>    
               </select>
            
-              
-              
 
               <input class="btn btn-dark mt-3" type="submit" value="Submit " />
           </form>
+         {% else %}
 
+         <hr>
+         <p> To write a review please <a href="{% url 'accounts:loginUser' %}">sign in</a></p>
+         {% endif %}
       </div>
     
 </section>

@@ -9,6 +9,9 @@ class Blog(models.Model):
     published_at = models.DateTimeField()
     category = models.CharField(max_length=2048,choices=categories.choices , default="Art")
     image = models.ImageField(upload_to="image/" , default="image/default.jpg")
+
+    def __str__(self) -> str:
+        return self.title
     
 class Review(models.Model):
     blog =  models.ForeignKey(Blog, on_delete=models.CASCADE)
